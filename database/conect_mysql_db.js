@@ -8,7 +8,7 @@ dotenv.config()
 
     const sequelize = new Sequelize (database.DB_NAME, database.DB_USER , database.DB_PASS, {
     host: database.DB_HOST,
-    dialect: database.dialect 
+    dialect: database.dialect
     });
 
     async function authenticate() {
@@ -18,7 +18,7 @@ dotenv.config()
       } catch(error){
         console.error('Error al conectarse a la BD:' , error);
       }
-      
+
     }
 
     authenticate()
