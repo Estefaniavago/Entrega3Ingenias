@@ -1,57 +1,20 @@
-const config = require("../../config/config.js");
-const { Sequelize, DataTypes, Op } = require("sequelize");
+const Actor = require('./actor.model');
+const Contenido = require('./contenido.model');
+const Tag = require('./tag.model');
+//const Items_Reparto = require('./items_repartos.modelo')
+//const Items_Tags = require('./items_tags.modelo');
+const Genero = require('./genero.model');
+const Contenido_tag = require('./contenido_tag.model');
+const Contenido_Reparto = require('./contenido_reparto.model');
 
-const sequelize = new Sequelize(
-  config.database.DB_NAME,
-  config.database.DB_USER,
-  config.database.DB_PASS,
-  {
-    host: config.database.DB_HOST,
-    port: config.database.DB_PORT,
-    dialect: config.database.dialect,
-  }
-);
 
-const database = {};
+Contenido.belongsToMany(Actor, { through: Contenido_Reparto });
+Actor.belongsToMany(Contenido, { through: Contenido_Reparto });
 
-database.Sequelize = Sequelize;
-database.Op = Op;
-database.sequelize = sequelize;
+Contenido.belongsToMany(Tag, { through: Contenido_tag });
+Tag.belongsToMany(Contenido, { through: Contenido_tag });
 
-database.actor = require("./actor.model.js")(sequelize, Sequelize, DataTypes);
-database.categoria = require("./categoria.model.js")(sequelize, Sequelize, DataTypes);
-database.contenido = require("./contenido.model.js")(sequelize, Sequelize, DataTypes);
-database.genero = require("./genero.model.js")(sequelize, Sequelize, DataTypes);
-database.tag= require("./tag.model.js")(sequelize, Sequelize, DataTypes);
+Genero.hasMany(Contenido, { foreignKey: 'genero_id' });
+Contenido.belongsTo(Genero, { foreignKey: 'genero_id' });
 
-database.contenido.belongsToMany(database.tag, {
-  through: "contenido_tag",
-  foreignKey: "id_contenido",
-  otherKey: "id_tag"
-});
-database.tag.belongsToMany(database.contenido, {
-  through: "contenido_tag",
-  foreignKey: "id_tag",
-  otherKey: "id_contenido"
-});
-database.contenido.belongsToMany(database.actor, {
-  through: "contenido_actor",
-  foreignKey: "id_contenido",
-  otherKey: "id_actor"
-});
-
-database.actor.belongsToMany(database.contenido, {
-  through: "contenido_actor",
-  foreignKey: "id_actor",
-  otherKey: "id_contenido"
-});
-
-database.categoria.belongsToMany(database.contenido, {
-  through: "categoria_contenido",
-  foreignKey: "categoria_id",
-  otherKey: "contenido_id"
-});
-
-db.ROLES = ["user", "admin", "moderator"];
-
-module.exports = database;
+module.exports = { Actor, Contenido, Tag, Contenido_Reparto, Contenido_tag, Genero };

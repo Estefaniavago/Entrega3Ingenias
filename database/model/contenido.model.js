@@ -3,48 +3,54 @@ const sequelize = require('../conect_mysql_db');
 
 
 class Contenido extends Model {}
-Contenido = sequelize.define("contenido", {
+Contenido.init({
     id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
-    },
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+},
 
-    titulo: {
+titulo: {
+type: DataTypes.STRING,
+allowNull: false
+},
+
+id_categoria: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+},
+
+id_genero: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+},
+
+resumen: {
     type: DataTypes.STRING,
     allowNull: false
-    },
+},
 
-    id_categoria: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
+temporadas: {
+    type: DataTypes.INTEGER
+},
 
-    id_genero: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
+trailer: {
+    type: DataTypes.STRING,
+    allowNull: false
+},
 
-    resumen: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+duracion: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+}
 
-    temporadas: {
-        type: DataTypes.INTEGER
-    },
-
-    trailer: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-
-    duracion: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    }
-
+},
+{
+    sequelize,
+    modelName: "Contenido",
+    tableName: "contenido", // Nombre de la tabla en la base de datos
+    timestamps: false // Deshabilitar createdAt y updatedAt
 });
 
 module.exports = Contenido;
