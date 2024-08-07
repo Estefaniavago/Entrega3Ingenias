@@ -3,4 +3,3 @@ const contenido = db.contenido;
 const actor = db.actor;
 
 c
-

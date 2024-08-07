@@ -10,10 +10,10 @@ Actor = sequelize.define("actor", {
     autoIncrement: true,
     primaryKey: true
   },
-   nombre_apellido: {
-     type: DataTypes.STRING,
-     allowNull: false
-   }
+    nombre_apellido: {
+      type: DataTypes.STRING,
+      allowNull: false
+  }
 });
 
 module.exports = Actor;

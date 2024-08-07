@@ -8,4 +8,6 @@
 
 2. Luego se empezó agregar archivos correspondientes en visual studio code sumado a las instalaciones necesarios para inicializar el proyecto:
 
-        npm install .... COMPLETAR
+        npm i sequelize mysql2 dotenv express
+
+3. Agregamos los endpoints para la funcionalidad.

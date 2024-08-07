@@ -10,10 +10,10 @@ Tag = sequelize.define("tag", {
     autoIncrement: true,
     primaryKey: true
   },
-   nombre: {
-     type: DataTypes.STRING,
-     allowNull: false
-   }
+    nombre: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
 });
 
 module.exports = Tag;

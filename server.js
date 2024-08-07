@@ -1,5 +1,5 @@
 //Requiere la conexion a bd
-const database= require('./database/model/index')
+const database= require('./database/model/index.js')
 const sequelize = require('./database/conect_mysql_db');
 const express = require("express");
 const bodyParser = require("body-parser");

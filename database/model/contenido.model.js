@@ -10,41 +10,41 @@ Contenido = sequelize.define("contenido", {
         autoIncrement: true,
         primaryKey: true
     },
-    
+
     titulo: {
-     type: DataTypes.STRING,
-     allowNull: false
+    type: DataTypes.STRING,
+    allowNull: false
     },
-    
+
     id_categoria: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    
+
     id_genero: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    
+
     resumen: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    
+
     temporadas: {
         type: DataTypes.INTEGER
     },
-    
+
     trailer: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    
+
     duracion: {
         type: DataTypes.INTEGER,
         allowNull: false
     }
-    
+
 });
 
 module.exports = Contenido;
