@@ -1,24 +1,24 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../conect_mysql_db');
 
+// Tabla de Genero
 class Genero extends Model {}
-
-Genero.init({
+Genero = sequelize.define("genero",
+    {
     id: {
-        type: DataTypes.INTEGER, 
+        type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true  
+        primaryKey: true
     },
-    genero: {
+    nombre: {
         type: DataTypes.STRING,
         allowNull: false
     }
 }, {
     sequelize,
     modelName: "Genero",
-    tableName: "genero" // Nombre de la tabla en la base de datos
-    
+    tableName: "genero"
 });
 
 module.exports = Genero;

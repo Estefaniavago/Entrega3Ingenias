@@ -6,8 +6,10 @@
 
 ![](script/diagrama.jpg)
 
-2. Luego se empezó agregar archivos correspondientes en visual studio code sumado a las instalaciones necesarios para inicializar el proyecto:
+2. Luego se empezó agregando los archivos correspondientes en visual studio code sumado a las instalaciones necesarios para inicializar el proyecto:
 
-        npm i sequelize mysql2 dotenv express
+        npm i sequelize mysql2 dotenv express body-parser
 
-3. Agregamos los endpoints para la funcionalidad.
+3. Agregamos los modulos y endpoints para la funcionalidad.
+
+4. Realizamos la conexión.

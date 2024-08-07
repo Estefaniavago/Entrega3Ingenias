@@ -1,20 +1,78 @@
-const Actor = require('./actor.model');
-const Contenido = require('./contenido.model');
-const Tag = require('./tag.model');
-//const Items_Reparto = require('./items_repartos.modelo')
-//const Items_Tags = require('./items_tags.modelo');
-const Genero = require('./genero.model');
-const Contenido_tag = require('./contenido_tag.model');
-const Contenido_Reparto = require('./contenido_reparto.model');
+// Importo Sequelize
+const config = require ("../../config/config");
+const { Sequelize, DataTypes, Op } = require ("sequelize");
+
+// Importo modelos
+const Contenido_actor = require("./contenido_actor.model");
+const Actor = require("./actor.model");
+const Contenido = require("./contenido.model");
+const Tag = require("./tag.model");
+const Genero = require("./genero.model");
+const Contenido_tag = require("./contenido_tag.model");
+
+// Conexión con la base de datos MySQL
+const sequelize = new Sequelize(
+    config.DB_NAME,
+    config.DB_USER,
+    config.DB_PASS,
+    {
+        host: config.DB_HOST,
+        port: config.DB_PORT,
+        dialect: config.dialect
+    }
+);
+
+// Defino la estructura de la base de datos
+const db = {}
+
+// Defino datos
+db.Sequelize = Sequelize;
+db.Op = Op;
+db.sequelize = sequelize;
 
 
-Contenido.belongsToMany(Actor, { through: Contenido_Reparto });
-Actor.belongsToMany(Contenido, { through: Contenido_Reparto });
+// Conexión con tablas
 
-Contenido.belongsToMany(Tag, { through: Contenido_tag });
-Tag.belongsToMany(Contenido, { through: Contenido_tag });
+// Tabla Contenido
+db.contenido = require('./contenido.model');
 
-Genero.hasMany(Contenido, { foreignKey: 'genero_id' });
-Contenido.belongsTo(Genero, { foreignKey: 'genero_id' });
+// Tabla Genero
+db.genero = require('./genero.model');
 
-module.exports = { Actor, Contenido, Tag, Contenido_Reparto, Contenido_tag, Genero };
+// Tabla Categoria
+db.categoria = require ('./categoria.model');
+
+// Tabla Contenido_Tag
+db.contenido_tag = require('./contenido_tag.model');
+
+// Tabla Tag
+db.tag = require('./tag.model');
+
+// Tabla Contenido_Actor
+db.contenido_actor = require('./contenido_actor.model');
+
+// Tabla Actor
+db.actor = require('./actor.model');
+
+
+// Relaciones
+db.contenido.belongsToMany(db.actor,
+    { through: db.contenido_actor });
+
+db.actor.belongsToMany(db.contenido,
+    { through: db.contenido_actor });
+
+db.contenido.belongsToMany(db.tag,
+    { through: db.contenido_tag });
+
+db.tag.belongsToMany(db.contenido,
+    { through: db.contenido_tag });
+
+db.genero.hasMany(db.contenido,
+    { foreignKey: 'genero_id' });
+
+db.contenido.belongsTo(db.genero,
+    { foreignKey: 'genero_id' });
+
+// Exportar base de datos
+module.exports = db;
